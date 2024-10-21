@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfico de Redes Sociais</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Redes Sociais com Mais Usuários no Mundo</h1>
+    <canvas id="socialChart"></canvas>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('socialChart').getContext('2d');
+
+    const data = {
+      labels: ['Facebook', 'YouTube', 'WhatsApp', 'Instagram', 'TikTok', 'Snapchat', 'Twitter'],
+      datasets: [{
+        label: 'Número de Usuários (em bilhões)',
+        data: [2.96, 2.5, 2.24, 2.35, 1.1, 0.64, 0.55],
+        backgroundColor: [
+          '#3b5998', '#FF0000', '#25D366', '#E4405F', '#010101', '#FFFC00', '#1DA1F2'
+        ],
+        borderColor: [
+          '#2d4373', '#CC0000', '#128C7E', '#C13584', '#333333', '#CCCC00', '#1A91DA'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return ${context.dataset.label}: ${context.raw} bilhões;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Usuários (bilhões)'
+            }
+          }
+        }
+      }
+    };
+
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>
